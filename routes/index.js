@@ -42,9 +42,10 @@ router.get('/login', async function(req, res, next) {
 router.post('/sign-in', async function(req, res, next) {
   var shapwd = SHA256(req.body.pwd).toString(encBase64);
   var user = await users.findOne({ email : req.body.email.toLowerCase(), pwd : shapwd });
+  
   if (user) {
     req.session.email = user.email;
-    req.session.id = user._id;
+    req.session.user_id = user._id;
     res.redirect('/');
   }
   else {
@@ -61,7 +62,7 @@ router.post('/sign-up', async function(req, res, next) {
   else {
     user = await createUser(req.body);
     req.session.email = user.email;
-    req.session.id = user._id;
+    req.session.user_id = user._id;
     res.redirect('/');
   }
 });
@@ -72,13 +73,30 @@ router.get('/logout', function(req, res, next) {
 });
 
 router.post('/search', async function(req, res, next) {
-  console.log(req.body);
   var departure = capitalize(req.body.departure);
   var arrival = capitalize(req.body.arrival);
   var date = req.body.date;
   var trips = await journeys.find({ departure : departure, arrival: arrival, date: req.body.date});
-  console.log(trips);
+
   res.render('search-results', { journeys: trips, routename:"", date });
+});
+
+router.get('/select-journey', async function(req, res, next) {
+  var user = await users.findById(req.session.user_id);
+
+  user.journeys.push(req.query.id);
+  user = await user.save();
+  res.redirect('/basket');
+})
+
+router.get('/basket', async function(req, res, next) {
+  var user = await users.findById(req.session.user_id).populate('journeys').exec();
+  // console.log(user);
+
+  var myJourneys = user.journeys;
+  // console.log('myJourneys : ');
+  // console.log(myJourneys);
+  res.render('basket', { myJourneys : myJourneys });
 });
 
 module.exports = router;
