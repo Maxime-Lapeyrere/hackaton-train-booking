@@ -8,6 +8,7 @@ var connect = require('./models/connectdb')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var dbRouter = require('./routes/db');
+var checkoutRouter = require('./routes/checkout');
 
 var session = require("express-session");
 var app = express();
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/db', dbRouter);
+app.use('/checkout', checkoutRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

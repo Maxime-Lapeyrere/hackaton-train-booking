@@ -40,8 +40,8 @@ router.get('/login', async function(req, res, next) {
 
 // SIGN-IN
 router.post('/sign-in', async function(req, res, next) {
-  var shapwd = SHA256(req.body.pwd).toString(encBase64);
-  var user = await users.findOne({ email : req.body.email.toLowerCase(), pwd : shapwd });
+  var shaPwd = SHA256(req.body.pwd).toString(encBase64);
+  var user = await users.findOne({ email : req.body.email.toLowerCase(), pwd : shaPwd });
   
   if (user) {
     req.session.email = user.email;
@@ -89,11 +89,17 @@ router.get('/select-journey', async function(req, res, next) {
   res.redirect('/basket');
 })
 
+router.get('/remove', async function(req, res, next) {
+  var user = await users.findById(req.session.user_id);
+  user.journeys.splice(req.query.id, 1);
+})
+
 router.get('/basket', async function(req, res, next) {
   var user = await users.findById(req.session.user_id).populate('journeys').exec();
   // console.log(user);
-
   var myJourneys = user.journeys;
+
+  req.session.basket = myJourneys;
   // console.log('myJourneys : ');
   // console.log(myJourneys);
   res.render('basket', { myJourneys : myJourneys,  routename: ''  });
