@@ -39,8 +39,7 @@ router.get('/save', async function(req, res, next) {
         departureTime:Math.floor(Math.random() * Math.floor(23)) + ":00",
         price: Math.floor(Math.random() * Math.floor(125)) + 25,
       });
-       
-       await newUser.save();
+await newUser.save();
 
     }
 
