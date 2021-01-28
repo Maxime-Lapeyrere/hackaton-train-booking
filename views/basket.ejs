@@ -25,15 +25,17 @@
                             <th>Date</th>
                             <th>Departure Time</th>
                             <th>Price</th>
+                            <th></th>
                         </thead>
                         <tbody>
                             <%for(i=0;i<myJourneys.length;i++){%>
                             <tr>
                                 <td><%=i+1%></td>
-                                <td><%=myJourneys[i].departure/myJourneys[i].arrival%></td>
+                                <td><%=myJourneys[i].departure%> / <%=myJourneys[i].arrival%>`</td>
                                 <td><%=myJourneys[i].date%></td>
                                 <td><%=myJourneys[i].departureTime%></td>
                                 <td><%=myJourneys[i].price%>€</td>
+                                <td><a href="/remove?id=<%=i%>"></a></td>
                             </tr>
                             <%}%>
                         </tbody>
@@ -47,6 +49,7 @@
                             total += myJourneys[i].price
                         } %>
                             <th class="lastchild"><%=total%>€</th>
+                            <th></th>
                         </tfoot>
                     </table>
                     <button type="submit" id="checkout-button">Checkout</button>

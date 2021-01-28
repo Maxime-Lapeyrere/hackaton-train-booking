@@ -30,7 +30,7 @@ var createUser = async (data) => {
 router.get('/', function(req, res, next) {
   if (!req.session.email)
     res.redirect('/login');
-  res.render('basket', { routename: '' });
+  res.render('journey', { routename: '' });
 });
 
 // LOGIN PAGE
@@ -96,7 +96,7 @@ router.get('/basket', async function(req, res, next) {
   var myJourneys = user.journeys;
   // console.log('myJourneys : ');
   // console.log(myJourneys);
-  res.render('basket', { myJourneys : myJourneys });
+  res.render('basket', { myJourneys : myJourneys,  routename: ''  });
 });
 
 module.exports = router;
