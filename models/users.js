@@ -1,5 +1,6 @@
 mongoose = require('mongoose');
 
+
 var UserSchema = mongoose.Schema({
   lastName: String,
   firstName: String,
