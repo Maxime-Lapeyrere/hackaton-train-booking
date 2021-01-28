@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>journey Page</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+  </head>
+  <body>
+    <header>
+      <%- include('header',{routename}); %>
+     
+    </header>
+    <main>
+      <div id="containersearch">
+        <div class="infologsearch">
+          <h2>One Way Ticket :</h2>
+          <form action="/search" class="inputfieldsearch" method="POST">
+            <input type="text" placeholder="From: Paris, Marseille,..." class="loginputsearch" name="departure">
+            <input type="text" placeholder="To: Lille, Nantes,..." class="loginputsearch" name="arrival">
+            <input type="date" placeholder="Email" class="loginputsearch" name="date">
+            <button type="submit" class="go"><i class="fas fa-search"></i> Go !</button>
+          </form>
+        </div>
+        <div id="imgbkg"><img src="/images/landmark.png" id="imgbkg" alt=""></div>
+      </div>
+    </main>
+    <footer>
+      <p>© Judith Poulvelarie & Maxime Lapeyrere - La Capsule Batch 28</p>
+    </footer>
+  </body>
+</html>
