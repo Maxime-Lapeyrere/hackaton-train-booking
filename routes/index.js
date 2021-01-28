@@ -1,9 +1,7 @@
 var express = require('express');
 var router = express.Router();
-
+var request = require('sync-request');
 const mongoose = require('mongoose');
-
-COUCOU 
 
 // useNewUrlParser ;)
 var options = {
