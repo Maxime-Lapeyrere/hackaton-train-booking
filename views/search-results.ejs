@@ -15,9 +15,9 @@
         <main>
             <div class="result">
             <% if(journeys.length < 1){%>
-                <h2>No tickets available on 20/12/21:</h2>
+                <h2>No tickets available on <%=date%>:</h2>
                 <%} else {%>
-                    <h2>Tickets available on 20/12/21:</h2>
+                    <h2>Tickets available on <%=date%>:</h2>
                         <ul>
                             <%for(i=0; i<journeys.length; i++){%>
                                 <li class="card">
@@ -25,7 +25,7 @@
                                     <p>train departure time at <%=journeys[i].departureTime%></p>
                                     <div class="pricebtn">
                                         <h4><%=journeys[i].price%>€</h4>
-                                        <button class="selectrip">Select!</button>
+                                        <a href="/select-journey?id=<%=journeys[i]._id%>"><button class="selectrip">Select!</button></a>
                                     </div>   
                                 </li>
                                 <%}%>

@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const mongoose = require('mongoose');
 var journeyModel = require('../models/journeydb');
 
 var city = ["Paris","Marseille","Nantes","Lyon","Rennes","Melun","Bordeaux","Lille"];
