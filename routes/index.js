@@ -1,73 +1,74 @@
 var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
-var journeyModel = require('../models/journeydb')
+var users = require('../models/users');
+var SHA256 = require("crypto-js/sha256");
+var encBase64 = require('crypto-js/enc-base64');
 
 
+var createUser = async (data) => {
+  var newUser = new users ({
+    lastName: data.lastName.toLowerCase(),
+    firstName: data.firstName.toLowerCase(),
+    email: data.email.toLowerCase(),
+    pwd: SHA256(data.pwd).toString(encBase64),
+    journeys: [ ]
+  });
+  console.log("newUser : ");//DEBUG
+  console.log(newUser);//DEBUG
+  var userSaved = await newUser.save();
+  console.log("newUser_DB : ");//DEBUG
+  console.log(await users.find());//DEBUG
 
-
-
-var city = ["Paris","Marseille","Nantes","Lyon","Rennes","Melun","Bordeaux","Lille"]
-var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
-
-
+  return userSaved;
+};
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('journey', { routename: 'login' });
+  if (!req.session.email)
+    res.redirect('/login');
+  res.render('journey', {routename: ''});
 });
 
+// LOGIN PAGE
+router.get('/login', async function(req, res, next) {
+  res.render('login', { error: "", routename: 'login'});
+});
 
-// Remplissage de la base de donnée, une fois suffit
-router.get('/save', async function(req, res, next) {
-
-  // How many journeys we want
-  var count = 300
-
-  // Save  ---------------------------------------------------
-    for(var i = 0; i< count; i++){
-
-    departureCity = city[Math.floor(Math.random() * Math.floor(city.length))]
-    arrivalCity = city[Math.floor(Math.random() * Math.floor(city.length))]
-
-    if(departureCity != arrivalCity){
-
-      var newUser = new journeyModel ({
-        departure: departureCity , 
-        arrival: arrivalCity, 
-        date: date[Math.floor(Math.random() * Math.floor(date.length))],
-        departureTime:Math.floor(Math.random() * Math.floor(23)) + ":00",
-        price: Math.floor(Math.random() * Math.floor(125)) + 25,
-      });
-await newUser.save();
-
-    }
-
+// SIGN-IN
+router.post('/sign-in', async function(req, res, next) {
+  console.log(req.body);//DEBUG
+  var shapwd = SHA256(req.body.pwd).toString(encBase64);
+  console.log(shapwd);
+  var user = await users.findOne({ email : req.body.email.toLowerCase(), pwd : shapwd });
+  if (user) {
+    req.session.email = user.email;
+    req.session.id = user._id;
+    res.redirect('/');
   }
-  res.render('index', { title: 'Express' });
-});
-
-
-// Cette route est juste une verification du Save.
-// Vous pouvez choisir de la garder ou la supprimer.
-router.get('/result', function(req, res, next) {
-
-  // Permet de savoir combien de trajets il y a par ville en base
-  for(i=0; i<city.length; i++){
-
-    journeyModel.find( 
-      { departure: city[i] } , //filtre
-  
-      function (err, journey) {
-
-          console.log(`Nombre de trajets au départ de ${journey[0].departure} : `, journey.length);
-      }
-    )
-
+  else {
+    res.render('login', { error: "Utilisateur inconnu", routename: 'login'});
   }
-
-
-  res.render('index', { title: 'Express' });
 });
+
+// SIGN-UP
+router.post('/sign-up', async function(req, res, next) {
+  console.log(req.body);
+  var user = await users.findOne({ email : req.body.email.toLowerCase() });
+  if (user) {
+    res.render('login', { error: "L'utilisateur existe déjà, utilisez le formulaire sign-in", routename: 'login' });
+  }
+  else {
+    user = await createUser(req.body);
+    req.session.email = user.email;
+    req.session.id = user._id;
+    res.redirect('/');
+  }
+});
+
+router.get('/logout', function(req, res, next) {
+  req.session.destroy();
+  res.redirect('/');
+})
 
 module.exports = router;

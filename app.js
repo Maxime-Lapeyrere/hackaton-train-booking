@@ -7,6 +7,7 @@ var connect = require('./models/connectdb')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var dbRouter = require('./routes/db');
 
 var session = require("express-session");
 var app = express();
@@ -14,7 +15,7 @@ app.use(
   session({ 
    secret: 'a4f8071f-c873-4447-8ee2',
    resave: false,
-   saveUninitialized: false,
+  saveUninitialized: false,
   })
 );
 
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/db', dbRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
