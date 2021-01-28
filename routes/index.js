@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
-var journey = require('../models/journeydb')
+var journeyModel = require('../models/journeydb')
 
 
 
