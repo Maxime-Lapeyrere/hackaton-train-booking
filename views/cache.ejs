@@ -1,15 +1,39 @@
-<!-- <% if(journeys.length < 1){%>
-            <div id="result">
-                <h2>tickets available on <%=journeys[0].date%></h2>
-                <%for(i=0; i<journeys.length; i++){%>
-                    <div class="card">
-                        <h4><%=journeys[i].departure%>/<%=journeys[i].arrival%></h4>
-                        <p>train departure time at: <%=journeys[i].departureTime%></p>
-                        <div>
-                            <h4><%=journeys[i].price%>€</h4>
-                            <button>Select!</button>
-                        </div>
-                    </div>
-                <%}%>
-            </div>
-        <%}%> -->
+<div class="result">
+    <% if(myJourneys.length < 1){%>
+        <h2>No journeys selected, please <a href="/"><button id="selectone">Select One</button> </a></h2>
+        <%} else {%>
+            <h2>My tickets:</h2>
+            <table>
+                <thead>
+                    <th>N°</th>
+                    <th>Journey</th>
+                    <th>Date</th>
+                    <th>Departure Time</th>
+                    <th>Price</th>
+                </thead>
+                <tbody>
+                    <%for(i=0;i<myJourneys.length;i++){%>
+                    <tr>
+                        <td><%=i+1%></td>
+                        <td><%=myJourneys[i].departure/myJourneys[i].arrival%></td>
+                        <td><%=myJourneys[i].date%></td>
+                        <td><%=myJourneys[i].departureTime%></td>
+                        <td><%=myJourneys[i].price%>€</td>
+                    </tr>
+                    <%}%>   
+                    <tr id="totaline">
+                        <td id="totaltxt">Total</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <%var total = 0;
+                        for(i=0;i<myJourneys.length; i++){
+                            total += myJourneys[i].price
+                        } %>
+                        <td><%=total%>€</td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="checkout"><button type="submit">Checkout</button></a>
+        <%}%>       
+    </div>

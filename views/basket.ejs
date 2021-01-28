@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>journey Page</title>
+        <link rel="stylesheet" href="/stylesheets/basket.css" />
+        <link
+        rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+        integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+        crossorigin="anonymous"
+        />
+    </head>
+    <body>
+        <header><%- include('header',{routename}); %></header>
+        <main>
+            <div class="container">
+                <% if(myJourneys.length < 1){%>
+                    <h2>No journeys selected, please <a href="/"><button id="selectone">Select One</button> </a></h2>
+                    <%} else {%>
+                    <h2>My tickets:</h2>
+                    <table id="table">
+                        <thead>
+                            <th>N°</th>
+                            <th>Journey</th>
+                            <th>Date</th>
+                            <th>Departure Time</th>
+                            <th>Price</th>
+                        </thead>
+                        <tbody>
+                            <%for(i=0;i<myJourneys.length;i++){%>
+                            <tr>
+                                <td><%=i+1%></td>
+                                <td><%=myJourneys[i].departure/myJourneys[i].arrival%></td>
+                                <td><%=myJourneys[i].date%></td>
+                                <td><%=myJourneys[i].departureTime%></td>
+                                <td><%=myJourneys[i].price%>€</td>
+                            </tr>
+                            <%}%>
+                        </tbody>
+                        <tfoot id="totaline">
+                            <th id="totaltxt" class="firstchild">Total</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <%var total = 0;
+                        for(i=0;i<myJourneys.length; i++){
+                            total += myJourneys[i].price
+                        } %>
+                            <th class="lastchild"><%=total%>€</th>
+                        </tfoot>
+                    </table>
+                    <button type="submit" id="checkout-button">Checkout</button>
+                    <%}%>
+            </div>
+        
+        
+        </main>
+        <footer>
+        <p>© Judith Poulvelarie & Maxime Lapeyrere - La Capsule Batch 28</p>
+        </footer>
+
+    <!-- scripts -->
+    <script src="javascripts/stripe_payment.js"></script>
+
+    </body>
+</html>

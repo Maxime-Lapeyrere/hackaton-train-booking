@@ -1,0 +1,117 @@
+body {
+    padding: 0;
+    margin: 0;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    background: rgb(125, 141, 238);
+    background: linear-gradient(
+        180deg,
+        rgba(125, 141, 238, 1) 0%,
+        rgba(149, 246, 255, 1) 100%
+    );
+    height: 100vh;
+}
+body {
+    padding: 0;
+    margin: 0;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    background: rgb(125, 141, 238);
+    background: linear-gradient(
+        180deg,
+        rgba(125, 141, 238, 1) 0%,
+        rgba(149, 246, 255, 1) 100%
+    );
+    height: 100vh;
+}
+h2 {
+    color: #ffffff;
+}
+
+a {
+    color:black;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #ffffff;
+    flex-wrap: wrap;
+}
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+footer {
+    display: flex;
+    justify-content: center;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+h4{
+
+}
+
+table{
+    width: 50rem;
+}
+
+#homelogo{
+    display: flex;
+    width: 15rem;
+    justify-content: space-evenly;
+}
+    
+#headnav{
+    display: flex;
+    width: 25rem;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.logo{
+    height: 50px;
+    margin-right: 1rem;
+}
+
+#totaline{
+    background-color: rgb(255, 124, 124) !important;
+}
+/* .container{
+    width: 600px;
+} */
+/* thead{
+    width: 600px;
+} */
+table{
+    background-color: #ffffff;
+    border-collapse: collapse;
+    border-radius: 5px;
+    margin: 2rem;
+}
+
+.firstchild{
+    border-radius: 0 0 0 5px;
+}
+
+.lastchild{
+    border-radius: 0 0 5px 0;
+}
+
+td,th{
+    width: 15rem;
+    height: 3rem;
+}
+
+td{
+    text-align: center;
+    border: none;
+}
+
+    
