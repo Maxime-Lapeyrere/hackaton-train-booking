@@ -44,7 +44,6 @@ var createUser = async (data) => {
 router.get('/', function(req, res, next) {
   if (!req.session.email)
     res.redirect('/login');
-  //console.log(req.session.email);
   res.render('journey', { routename: '' });
 });
 

@@ -34,14 +34,14 @@ router.post('/', async (req, res) => {
     payment_method_types: ['card'],
     line_items: stripeBasket,
     mode: 'payment',
-    success_url: `http://localhost:3000/success`,
-    cancel_url: `http://localhost:3000/cancel`,
+    success_url: `http://localhost:3000/checkout/success`,
+    cancel_url: `http://localhost:3000/checkout/cancel`,
   });
   res.json({ id: session.id });
 });
 
 router.get('/cancel', function (req, res, next) {
-  res.render('shop', { basket: req.session.basket });
+  res.render('basket', { basket: req.session.basket });
 })
 
 router.get('/success', function (req, res, next) {
