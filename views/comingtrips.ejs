@@ -30,7 +30,7 @@
                         <tbody>
                             <%for(i=0;i<myJourneys.length;i++){%>
                             <tr>
-                                <td><%=myJourneys[i].date%></td>
+                                <td><%=formatDate(myJourneys[i].date)%></td>
                                 <td><%=myJourneys[i].departure%> / <%=myJourneys[i].arrival%>`</td>
                                 <td><%=myJourneys[i].departureTime%></td>
                                 <td><%=myJourneys[i].price%>€</td>

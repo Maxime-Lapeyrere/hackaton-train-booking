@@ -1,4 +1,4 @@
-body {
+/* body {
     padding: 0;
     margin: 0;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -11,7 +11,7 @@ body {
         rgba(149, 246, 255, 1) 100%
     );
     height: 100vh;
-}
+} */
 body {
     padding: 0;
     margin: 0;
@@ -34,6 +34,11 @@ a {
     color:black;
 }
 
+.container{
+    margin: 1rem;
+    padding: 1rem
+}
+
 header {
     display: flex;
     justify-content: space-between;
@@ -45,7 +50,8 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: fit-content;
+
 }
 footer {
     display: flex;
@@ -58,10 +64,33 @@ a {
 h4{
 
 }
-
-table{
-    width: 50rem;
+.selectrip{
+    margin-right: 1rem;
+    margin-left: 3rem;
+    background-color: #f23a4d;
+    color: white;
+    border-radius: 15px;
+    border: none;
+    padding: 15px;
 }
+.selectrip:hover{
+    border: 3px solid darkred;
+    cursor: pointer;
+    padding: 12px;
+}
+#buttonsup{
+    display: flex;
+    justify-content: space-between;
+}
+.buttonsearchnew{
+    display: flex;
+    align-items: center;
+}
+.buttoncheck{
+    display: flex;
+    justify-content: flex-end;
+}
+
 
 #homelogo{
     display: flex;
@@ -89,6 +118,11 @@ table{
     border-collapse: collapse;
     border-radius: 5px;
     margin: 2rem;
+    width: 70rem;
+}
+
+.fa-sync-alt{
+    margin: 1rem;
 }
 
 .firstchild{
@@ -100,7 +134,7 @@ table{
 }
 
 td,th{
-    width: 15rem;
+    width: 20rem;
     height: 3rem;
 }
 
@@ -194,3 +228,6 @@ nav a{
     }
   }
 
+  .active{
+    color: orange;
+  }

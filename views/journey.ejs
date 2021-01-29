@@ -15,9 +15,9 @@
         <div class="infologsearch">
           <h2>One Way Ticket :</h2>
           <form action="/search" class="inputfieldsearch" method="POST">
-            <input type="text" placeholder="From: Paris, Marseille,..." class="loginputsearch" name="departure">
-            <input type="text" placeholder="To: Lille, Nantes,..." class="loginputsearch" name="arrival">
-            <input type="date" placeholder="Email" class="loginputsearch" name="date">
+            <input type="text" placeholder="From: Paris, Marseille,..." class="loginputsearch" name="departure" required>
+            <input type="text" placeholder="To: Lille, Nantes,..." class="loginputsearch" name="arrival" required>
+            <input type="date" placeholder="Email" class="loginputsearch" name="date" required>
             <button type="submit" class="go"><i class="fas fa-search"></i> Go !</button>
           </form>
         </div>

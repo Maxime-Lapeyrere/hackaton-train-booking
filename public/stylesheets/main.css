@@ -131,7 +131,7 @@ flex-wrap: wrap;
   
 }
 .active{
-  color: red;
+  color: orange;
 }
 nav a{
   font-family: 'Oswald', sans-serif;
@@ -200,5 +200,19 @@ nav a h3:hover{
   nav a:nth-child(#{$i}){
     animation:show .2s #{$i*0.1+1}s ease 1 both;
   }
+}
+.selectrip{
+  margin-right: 1rem;
+  margin-left: 3rem;
+  background-color: #f23a4d;
+  color: white;
+  border-radius: 15px;
+  border: none;
+  padding: 15px;
+}
+.selectrip:hover{
+  border: 3px solid darkred;
+  cursor: pointer;
+  padding: 12px;
 }
 

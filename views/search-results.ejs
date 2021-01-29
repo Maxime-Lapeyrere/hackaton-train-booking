@@ -13,12 +13,14 @@
     <body>
         <header><%- include('header',{routename}); %></header>
         <main>
-            <div class="result">
             <% if(journeys.length < 1){%>
-                <h2>No tickets available on <%=date%>:</h2>
-                <a href="/"><button type="submit" id="">Search a new journey</button></a>
+            <div class="result1">
+                <h2>No tickets available on <%=formatDate(date)%>:</h2>
+                <a href="/"><button type="submit" id="" class="selectrip" style="display: flex; justify-content: center;">Search a new journey</button></a>
+            </div>
                 <%} else {%>
-                    <h2>Tickets available on <%=date%>:</h2>
+                    <div class="result">
+                    <h2>Tickets available on <%=formatDate(date)%>:</h2>
                         <ul>
                             <%for(i=0; i<journeys.length; i++){%>
                                 <li class="card">
@@ -31,8 +33,8 @@
                                 </li>
                                 <%}%>
                             </ul>
-                <%}%>       
-            </div>
+                        </div>
+                        <%}%>       
         
         
         </main>

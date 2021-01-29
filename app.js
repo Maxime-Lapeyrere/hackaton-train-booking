@@ -20,7 +20,21 @@ app.use(
   })
 );
 
+app.locals.formatDate  = (currentDate) => {
+  let dateConvert = new Date(currentDate);
+  let dayDate = dateConvert.getDate();
+  let monthDate = dateConvert.getMonth()+1;
+  let yearDate = dateConvert.getFullYear();
+
+  let prefixDay = dayDate <10 ? "0" + dayDate : dayDate;
+  let prefixMonth = monthDate <10 ? "0" + monthDate : monthDate;
+  let finalDate = prefixDay + "/" + prefixMonth + "/" + yearDate;
+  return finalDate
+}
+
 // view engine setup
+
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 

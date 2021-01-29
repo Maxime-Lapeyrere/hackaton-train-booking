@@ -91,6 +91,16 @@ h4{
     box-shadow: 5px 4px 4px rgba(19, 19, 143, 0.472);
 
 }
+.result1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.result{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
 .pricebtn{
     display: flex;
     align-items: center;
@@ -177,5 +187,9 @@ nav a{
     nav a:nth-child(#{$i}){
       animation:show .2s #{$i*0.1+1}s ease 1 both;
     }
+  }
+
+  .active{
+    color: orange;
   }
 
