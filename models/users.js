@@ -7,8 +7,9 @@ var UserSchema = mongoose.Schema({
   email: String,
   pwd: String,
   journeys: [ { 
-    type: mongoose.Schema.Types.ObjectId, ref: 'journeys' , 
-    quantity: Number } ]
+    id: { type: mongoose.Schema.Types.ObjectId, ref: 'journeys' }, 
+    quantity: Number 
+  }]
 });
 
 var userModel = mongoose.model('users', UserSchema);
