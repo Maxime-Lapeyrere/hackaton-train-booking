@@ -25,6 +25,8 @@
                             <th>Date</th>
                             <th>Departure Time</th>
                             <th>Price</th>
+                            <th>nb de billet(s)</th>
+                            <th>journey total price</th>
                             <th></th>
                         </thead>
                         <tbody>
@@ -35,12 +37,17 @@
                                 <td><%=myJourneys[i].date%></td>
                                 <td><%=myJourneys[i].departureTime%></td>
                                 <td><%=myJourneys[i].price%>€</td>
+                                <td><%=myJourneys[i].quantity%></td>
+                                <%var totaljourney = myJourneys[i].price*myJourneys[i].quantity%>
+                                <td><%=totaljourney%></td>
                                 <td><a href="/remove?id=<%=i%>"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
                             <%}%>
                         </tbody>
                         <tfoot id="totaline">
                             <th id="totaltxt" class="firstchild">Total</th>
+                            <th></th>
+                            <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
