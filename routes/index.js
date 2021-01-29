@@ -30,6 +30,7 @@ var createUser = async (data) => {
 router.get('/', function(req, res, next) {
   if (!req.session.email)
     res.redirect('/login');
+  //console.log(req.session.email);
   res.render('journey', { routename: '' });
 });
 
@@ -91,18 +92,17 @@ router.get('/select-journey', async function(req, res, next) {
 
 router.get('/remove', async function(req, res, next) {
   var user = await users.findById(req.session.user_id);
-  user.journeys.splice(req.query.id, 1);
+  user.journeys.pull({ _id: req.query.id});
+  user = user.save();
   res.redirect('/basket');
+
 })
 
 router.get('/basket', async function(req, res, next) {
   var user = await users.findById(req.session.user_id).populate('journeys').exec();
-  // console.log(user);
   var myJourneys = user.journeys;
 
   req.session.basket = myJourneys;
-  // console.log('myJourneys : ');
-  // console.log(myJourneys);
   res.render('basket', { myJourneys : myJourneys,  routename: ''  });
 });
 
