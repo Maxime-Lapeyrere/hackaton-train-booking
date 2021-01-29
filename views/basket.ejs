@@ -44,7 +44,8 @@
                                 <td><%=myJourneys[i].quantity%></td>
                                 <%var totaljourney = myJourneys[i].trip.price*myJourneys[i].quantity%>
                                 <td><%=totaljourney%>€</td>
-                                <td><a href="/remove?id=<%myJourneys[i].trip._id%>"><i class="fas fa-trash-alt"></i></a></td>
+
+                                <td><a href="/remove?id=<%=myJourneys[i].trip._id%>"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
                             <%}%>
                         </tbody>

@@ -122,8 +122,10 @@ router.get('/refresh', async function(req, res, next){
 
 router.get('/remove', async function(req, res, next) {
   var user = await users.findById(req.session.user_id);
-  user.journeys.pull({ _id: req.query.id});
-  user = user.save();
+  var trips = user.journeys.filter(journey => journey.id != req.query.id);
+
+  user.journeys = trips;
+  user.save();
   res.redirect('/basket');
 })
 
