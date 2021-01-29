@@ -92,6 +92,7 @@ router.get('/select-journey', async function(req, res, next) {
 router.get('/remove', async function(req, res, next) {
   var user = await users.findById(req.session.user_id);
   user.journeys.splice(req.query.id, 1);
+  res.redirect('/basket');
 })
 
 router.get('/basket', async function(req, res, next) {
