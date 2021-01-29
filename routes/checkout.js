@@ -35,8 +35,8 @@ router.post('/', async (req, res) => {
     payment_method_types: ['card'],
     line_items: stripeBasket,
     mode: 'payment',
-    success_url: `http://localhost:3000/checkout/success`,
-    cancel_url: `http://localhost:3000/checkout/cancel`,
+    success_url: `https://murmuring-caverns-59722.herokuapp.com/checkout/success`,
+    cancel_url: `https://murmuring-caverns-59722.herokuapp.com/checkout/cancel`,
   });
   res.json({ id: session.id });
 });
