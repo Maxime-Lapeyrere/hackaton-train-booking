@@ -3,7 +3,7 @@ var router = express.Router();
 const stripe = require('stripe')('sk_test_51I9pcBBaZ5FeUoOTMDhN2zPXlku98b2ZhU8nd30EoL5nr5H2ISukqBR4lzPCrwMZilMmTwRWbRwBATIA2kSNyzpk00cBGUtx2U');
 
 
-function create_CheckoutCartItems(basket) {
+function create_CheckoutCart(basket) {
   var stripeCart = [];
   // var total = 0;
 
@@ -12,10 +12,10 @@ function create_CheckoutCartItems(basket) {
     stripeCart.push(
       {
         price_data: {
-          currency: 'usd',
+          currency: 'eur',
           product_data: {
-            name: basket[i].name,
-            images: [basket[i].image_url],
+            name: `${basket[i].departure}/${basket[i].arrival}`,
+            images: "/images/trainlogo.png",
           },
           unit_amount: basket[i].price * 100,
         },
@@ -28,7 +28,7 @@ function create_CheckoutCartItems(basket) {
 /* STRIPE - Create checkout session */
 router.post('/', async (req, res) => {
   // router.post('/create-checkout-session', async (req, res) => {
-  var stripeBasket = create_CheckoutCartItems(req.session.dataCardBike);
+  var stripeBasket = create_CheckoutCart(req.session.basket);
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
@@ -41,11 +41,11 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/cancel', function (req, res, next) {
-  res.render('shop', { dataCardBike: req.session.dataCardBike });
+  res.render('shop', { basket: req.session.basket });
 })
 
 router.get('/success', function (req, res, next) {
-  res.render('success', { dataCardBike: req.session.dataCardBike });
+  res.render('success', { basket: req.session.basket });
 })
 
 module.exports = router;

@@ -26,6 +26,20 @@ var createUser = async (data) => {
   return userSaved;
 };
 
+var add_to_basket = async (basket, journey_id) => {
+  var already_exists = false;
+
+  for (var i = 0; i < basket.length; i++) {
+    if (basket[i].id === journey_id) {
+      basket[i].quantity++;
+      already_exists = true;
+    }
+  }
+  if (already_exists === false)
+    basket.push({ id: journey_id, quantity: 1});
+  return basket;
+};
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if (!req.session.email)
@@ -85,8 +99,17 @@ router.post('/search', async function(req, res, next) {
 router.get('/select-journey', async function(req, res, next) {
   var user = await users.findById(req.session.user_id);
 
-  user.journeys.push(req.query.id);
+  user.journeys = add_to_basket(user.journeys, req.query.id);
   user = await user.save();
+  res.redirect('/basket');
+})
+
+router.get('/refresh', async function(req, res, next){
+  var user = await users.findById(req.session.user_id);
+  var journey = await user.journeys.findById(req.query.id);
+  console.log(journey);
+  journey.quantity = req.query.quantity;
+  journey = journey.save();
   res.redirect('/basket');
 })
 
@@ -95,7 +118,6 @@ router.get('/remove', async function(req, res, next) {
   user.journeys.pull({ _id: req.query.id});
   user = user.save();
   res.redirect('/basket');
-
 })
 
 router.get('/basket', async function(req, res, next) {
@@ -106,4 +128,7 @@ router.get('/basket', async function(req, res, next) {
   res.render('basket', { myJourneys : myJourneys,  routename: ''  });
 });
 
+router.get('/lastrip', async function(){
+  res.render('mylasttrips', { myJourneys : myJourneys,  routename: 'lastrip'  });
+})
 module.exports = router;
