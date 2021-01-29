@@ -45,7 +45,7 @@ router.get('/', function(req, res, next) {
   if (!req.session.email)
     res.redirect('/login');
   //console.log(req.session.email);
-  res.render('success', { routename: '' });
+  res.render('journey', { routename: '' });
 });
 
 // LOGIN PAGE
@@ -130,5 +130,8 @@ router.get('/basket', async function(req, res, next) {
 
 router.get('/lastrip', async function(){
   res.render('mylasttrips', { myJourneys : myJourneys,  routename: 'lastrip'  });
+})
+router.get('/myplanedtrips', async function(){
+  res.render('comingtrips', { myJourneys : myJourneys,  routename: 'planedtrips'  });
 })
 module.exports = router;
