@@ -14,12 +14,12 @@ function create_CheckoutCart(basket) {
         price_data: {
           currency: 'eur',
           product_data: {
-            name: `${basket[i].departure}/${basket[i].arrival}`,
-            images: "/images/trainlogo.png",
+            name: `${basket[i].trip.departure}/${basket[i].trip.arrival}`,
+            images: ["https://images.unsplash.com/photo-1607166452427-7e4477079cb9?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Ym94fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"],
           },
-          unit_amount: basket[i].price * 100,
+          unit_amount: parseInt(basket[i].trip.price * 100),
         },
-        quantity: basket[i].quantity,
+        quantity: parseInt(basket[i].quantity),
       });
   }
   return stripeCart;
@@ -28,7 +28,8 @@ function create_CheckoutCart(basket) {
 /* STRIPE - Create checkout session */
 router.post('/', async (req, res) => {
   // router.post('/create-checkout-session', async (req, res) => {
-  var stripeBasket = create_CheckoutCart(req.session.basket);
+  var stripeBasket = create_CheckoutCart(req.session.trips);
+  console.log(stripeBasket)
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
@@ -41,11 +42,11 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/cancel', function (req, res, next) {
-  res.render('basket', { basket: req.session.basket });
+  res.redirect('/basket');
 })
 
 router.get('/success', function (req, res, next) {
-  res.render('success', { basket: req.session.basket });
+  res.render('success', { basket: req.session.basket, routename:""});
 })
 
 module.exports = router;

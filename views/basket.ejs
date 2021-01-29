@@ -9,6 +9,7 @@
         integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
         crossorigin="anonymous"
         />
+        <script src="https://js.stripe.com/v3/"></script>
     </head>
     <body>
         <header><%- include('header',{routename}); %></header>
@@ -41,7 +42,7 @@
                                 <td><%=formatDate(myJourneys[i].trip.date)%></td>
                                 <td><%=myJourneys[i].trip.departureTime%></td>
                                 <td><%=myJourneys[i].trip.price%>€</td>
-                                <td><%=myJourneys[i].quantity%></td>
+                                <td><input type="number" name="quantity" id="newquantity" value="<%=myJourneys[i].quantity%>"><a href="/refresh?id=<%=myJourneys[i]._id%>&quantity=<%=myJourneys[i].quantity%>"><i class="fas fa-sync-alt"></i></a></td>
                                 <%var totaljourney = myJourneys[i].trip.price*myJourneys[i].quantity%>
                                 <td><%=totaljourney%>€</td>
                                 <td><a href="/remove?id=<%myJourneys[i].trip._id%>"><i class="fas fa-trash-alt"></i></a></td>
@@ -76,7 +77,7 @@
         </footer>
 
     <!-- scripts -->
-    <script src="javascripts/stripe_payment.js"></script>
+    <script src="/javascripts/stripe_payment.js"></script>
 
     </body>
 </html>
