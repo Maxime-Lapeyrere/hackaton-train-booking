@@ -71,7 +71,7 @@ table{
     
 #headnav{
     display: flex;
-    width: 25rem;
+    width: 40rem;
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
@@ -83,12 +83,7 @@ table{
 #totaline{
     background-color: rgb(255, 124, 124) !important;
 }
-/* .container{
-    width: 600px;
-} */
-/* thead{
-    width: 600px;
-} */
+
 table{
     background-color: #ffffff;
     border-collapse: collapse;
@@ -114,4 +109,88 @@ td{
     border: none;
 }
 
-    
+.buttonsdown{
+    margin:1rem;
+    padding: 1rem;
+    background-color: rgb(25, 106, 255);
+    color: white;
+    border: 1px solid white;
+    border-radius: 15px;
+    box-shadow: 5px 4px 4px rgba(19, 19, 143, 0.472);
+    font-weight: bold;
+}
+.buttonsdown:hover{
+    background-color: white;
+    color:rgb(25, 106, 255);
+    border: 1px solid rgb(25, 106, 255);
+    cursor: pointer;
+}
+nav a{
+    font-family: 'Oswald', sans-serif;
+    font-weight:500;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:#16151b;
+    margin:0 15px;
+    font-size:1rem;
+    letter-spacing:1px;
+    position:relative;
+    display:inline-block;
+  }
+  nav a:before{
+    content:'';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background:#16151b;
+    top:47%;
+    animation:out 0.2s cubic-bezier(1, 0, 0.58, 0.97) 1 both;
+  }
+  nav a:hover:before{
+    animation:in 0.2s cubic-bezier(1, 0, 0.58, 0.97) 1 both;
+  
+  }
+  nav a h3:hover{
+      color: red;
+  }
+  @keyframes in{
+    0%{
+      width: 0;
+      left:0;
+      right:auto;
+    }
+    100%{
+      left:0;
+      right:auto;
+      width: 100%;
+    }
+  }
+  @keyframes out{
+    0%{
+      width:100%;
+      left: auto;
+      right: 0;
+    }
+    100%{
+      width: 0;
+      left: auto;
+      right: 0;
+    }
+  }
+  @keyframes show{
+    0%{
+      opacity:0;
+      transform:translateY(-10px);
+    }
+    100%{
+      opacity:1;
+      transform:translateY(0);
+    }
+  }
+  
+  @for $i from 1 through 5 {
+    nav a:nth-child(#{$i}){
+      animation:show .2s #{$i*0.1+1}s ease 1 both;
+    }
+  }
+

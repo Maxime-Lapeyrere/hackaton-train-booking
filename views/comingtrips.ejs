@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>journey Page</title>
+        <link rel="stylesheet" href="/stylesheets/basket.css" />
+        <link
+        rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+        integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+        crossorigin="anonymous"
+        />
+    </head>
+    <body>
+        <header><%- include('header',{routename}); %></header>
+        <main>
+            <div class="container">
+                <% if(myJourneys.length < 1){%>
+                    <h2>You haven't any journey planed.<a href="/"><button id="selectone">Start an Adventure Now!</button> </a></h2>
+                    <%} else {%>
+                    <h2>My tickets:</h2>
+                    <table id="table">
+                        <thead>
+                            <th>Date</th>
+                            <th>Journey</th>
+                            <th>Departure Time</th>
+                            <th>Price</th>
+                            <th>details</th>
+                            
+                        </thead>
+                        <tbody>
+                            <%for(i=0;i<myJourneys.length;i++){%>
+                            <tr>
+                                <td><%=myJourneys[i].date%></td>
+                                <td><%=myJourneys[i].departure%> / <%=myJourneys[i].arrival%>`</td>
+                                <td><%=myJourneys[i].departureTime%></td>
+                                <td><%=myJourneys[i].price%>€</td>
+                                <td><a href="/details"><button type="submit">details</button></a></td>
+                                
+                            </tr>
+                            <%}%>
+                        </tbody>
+                    </table>
+                    <a href="/"><button type="submit" id="returnhome">Home</button></a>
+                    <%}%>
+            </div>
+        
+        
+        </main>
+        <footer>
+        <p>© Judith Poulvelarie & Maxime Lapeyrere - La Capsule Batch 28</p>
+        </footer>
+
+    <!-- scripts -->
+    
+
+    </body>
+</html>
