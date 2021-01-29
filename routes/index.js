@@ -103,12 +103,12 @@ router.get('/select-journey', async function(req, res, next) {
 });
 
 router.post('/refresh', async function(req, res, next){
+  var quantity = req.body.quantity >=  0 ? req.body.quantity : 0;
   var user = await users.findById(req.session.user_id);
-  console.log("req.body : ");
-  console.log(req.body);
+
   for (var i = 0; i < user.journeys.length; i++) {
     if (user.journeys[i].id == req.body.id)
-      user.journeys[i].quantity = req.body.quantity;
+      user.journeys[i].quantity = quantity;
   }
   user.save();
   res.redirect('/basket');
@@ -124,6 +124,8 @@ router.get('/remove', async function(req, res, next) {
 })
 
 router.get('/basket', async function(req, res, next) {
+  if (!req.session.email)
+    res.redirect('/login');
   req.session.trips = [];
   var user = await users.findById(req.session.user_id);
 
@@ -137,9 +139,6 @@ router.get('/basket', async function(req, res, next) {
   res.render('basket', { myJourneys : req.session.trips,  routename: ''  });
 });
 
-// router.get('/lastrip', async function(){
-//   res.render('mylasttrips', { myJourneys : myJourneys,  routename: 'lastrip'  });
-// })
 router.get('/myplanedtrips', async function(){
   res.render('comingtrips', { myJourneys : myJourneys,  routename: 'planedtrips'  });
 })
