@@ -137,9 +137,9 @@ router.get('/basket', async function(req, res, next) {
   res.render('basket', { myJourneys : req.session.trips,  routename: ''  });
 });
 
-router.get('/lastrip', async function(){
-  res.render('mylasttrips', { myJourneys : myJourneys,  routename: 'lastrip'  });
-})
+// router.get('/lastrip', async function(){
+//   res.render('mylasttrips', { myJourneys : myJourneys,  routename: 'lastrip'  });
+// })
 router.get('/myplanedtrips', async function(){
   res.render('comingtrips', { myJourneys : myJourneys,  routename: 'planedtrips'  });
 })
