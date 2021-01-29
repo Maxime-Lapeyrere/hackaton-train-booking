@@ -37,7 +37,7 @@
                                 <td><%=myJourneys[i].date%></td>
                                 <td><%=myJourneys[i].departureTime%></td>
                                 <td><%=myJourneys[i].price%>€</td>
-                                <td><%=myJourneys[i].quantity%></td>
+                                <td><input type="number" name="quantity" id="newquantity" value="<%=myJourneys[i].quantity%>"><a href="/refresh?id=<%=myJourneys[i]._id%>&quantity=<%=myJourneys[i].quantity%>"><i class="fas fa-sync-alt"></i></a></td>
                                 <%var totaljourney = myJourneys[i].price*myJourneys[i].quantity%>
                                 <td><%=totaljourney%></td>
                                 <td><a href="/remove?id=<%=i%>"><i class="fas fa-trash-alt"></i></a></td>
