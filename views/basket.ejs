@@ -40,7 +40,7 @@
                                 <td><input type="number" name="quantity" id="newquantity" value="<%=myJourneys[i].quantity%>"><a href="/refresh?id=<%=myJourneys[i]._id%>&quantity=<%=myJourneys[i].quantity%>"><i class="fas fa-sync-alt"></i></a></td>
                                 <%var totaljourney = myJourneys[i].price*myJourneys[i].quantity%>
                                 <td><%=totaljourney%></td>
-                                <td><a href="/remove?id=<%=i%>"><i class="fas fa-trash-alt"></i></a></td>
+                                <td><a href="/remove?id=<%=myJourneys[i]._id%>"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
                             <%}%>
                         </tbody>
