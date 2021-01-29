@@ -38,15 +38,15 @@
                             <tr>
                                 <td><%=i+1%></td>
                                 
-                                <td><%=myJourneys[i].trip.departure%> / <%=myJourneys[i].trip.arrival%>`</td>
+                                <td><%=myJourneys[i].trip.departure%> / <%=myJourneys[i].trip.arrival%></td>
                                 <td><%=formatDate(myJourneys[i].trip.date)%></td>
                                 <td><%=myJourneys[i].trip.departureTime%></td>
                                 <td><%=myJourneys[i].trip.price%>€</td>
                                 <td>
-                                    <form action="/refresh" method="POST">
+                                    <form action="/refresh" method="POST" class="formflex">
                                         <input type="number" name="quantity" id="newquantity" value="<%=myJourneys[i].quantity%>">
                                         <input class="line" type="hidden" name="id" value="<%=myJourneys[i].trip._id%>">
-                                        <span><button><i class="fas fa-sync-alt"></i></button></span>
+                                        <button><i class="fas fa-sync-alt"></i></button>
                                     </form>
                                     <!-- <a href="/refresh?id=<%=myJourneys[i].trip._id%>&quantity=<%=myJourneys[i].quantity%>"><i class="fas fa-sync-alt"></i></a></td> -->
                                 <%var totaljourney = myJourneys[i].trip.price*myJourneys[i].quantity%>
