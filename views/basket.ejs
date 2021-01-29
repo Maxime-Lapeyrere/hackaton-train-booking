@@ -42,10 +42,15 @@
                                 <td><%=formatDate(myJourneys[i].trip.date)%></td>
                                 <td><%=myJourneys[i].trip.departureTime%></td>
                                 <td><%=myJourneys[i].trip.price%>€</td>
-                                <td><input type="number" name="quantity" id="newquantity" value="<%=myJourneys[i].quantity%>"><a href="/refresh?id=<%=myJourneys[i]._id%>&quantity=<%=myJourneys[i].quantity%>"><i class="fas fa-sync-alt"></i></a></td>
+                                <td>
+                                    <form action="/refresh" method="POST">
+                                        <input type="number" name="quantity" id="newquantity" value="<%=myJourneys[i].quantity%>">
+                                        <input class="line" type="hidden" name="id" value="<%=myJourneys[i].trip._id%>">
+                                        <span><button><i class="fas fa-sync-alt"></i></button></span>
+                                    </form>
+                                    <!-- <a href="/refresh?id=<%=myJourneys[i].trip._id%>&quantity=<%=myJourneys[i].quantity%>"><i class="fas fa-sync-alt"></i></a></td> -->
                                 <%var totaljourney = myJourneys[i].trip.price*myJourneys[i].quantity%>
                                 <td><%=totaljourney%>€</td>
-
                                 <td><a href="/remove?id=<%=myJourneys[i].trip._id%>"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
                             <%}%>
@@ -59,7 +64,7 @@
                             <th></th>
                             <%var total = 0;
                         for(i=0;i<myJourneys.length; i++){
-                            total += myJourneys[i].trip.price
+                            total += myJourneys[i].trip.price*myJourneys[i].quantity;
                         } %>
                             <th ><%=total%>€</th>
                             <th class="lastchild"></th>

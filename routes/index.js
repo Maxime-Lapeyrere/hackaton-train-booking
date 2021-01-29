@@ -102,21 +102,15 @@ router.get('/select-journey', async function(req, res, next) {
   res.redirect('/basket');
 });
 
-// router.get('/refresh', async function(req, res, next){
-//   var user = await users.findById(req.session.user_id);
-//   var journey = await user.journeys.findById(req.query.id);
-//   console.log(journey);
-//   journey.quantity = req.query.quantity;
-//   journey = journey.save();
-//   res.redirect('/basket');
-// });
-
-router.get('/refresh', async function(req, res, next){
+router.post('/refresh', async function(req, res, next){
   var user = await users.findById(req.session.user_id);
-  var journey = await user.journeys.findById(req.query.id);
-  console.log(journey);
-  journey.quantity = req.query.quantity;
-  journey = journey.save();
+  console.log("req.body : ");
+  console.log(req.body);
+  for (var i = 0; i < user.journeys.length; i++) {
+    if (user.journeys[i].id == req.body.id)
+      user.journeys[i].quantity = req.body.quantity;
+  }
+  user.save();
   res.redirect('/basket');
 })
 
@@ -132,14 +126,13 @@ router.get('/remove', async function(req, res, next) {
 router.get('/basket', async function(req, res, next) {
   req.session.trips = [];
   var user = await users.findById(req.session.user_id);
-  console.log("user.journeys :");
-  console.log(user.journeys);
 
   for (var i = 0; i < user.journeys.length; i++){
-    var quantity = user.journeys[i].quantity;
-    req.session.trips.push( { 
+    if (user.journeys[i].quantity > 0) {
+      req.session.trips.push( { 
       trip : await journeys.findById(user.journeys[i].id),
       quantity: user.journeys[i].quantity });
+    }
   }
   res.render('basket', { myJourneys : req.session.trips,  routename: ''  });
 });
